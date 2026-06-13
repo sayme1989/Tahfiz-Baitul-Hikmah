@@ -2,7 +2,7 @@
 <html lang="ms">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Sekolah Tahfiz Baitul Hikmah, Penjara Penor</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -10,7 +10,7 @@
 <style>
 /* --- Asas & Pemboleh Ubah --- */
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; scroll-behavior: smooth; }
-body { background: #f8fafc; color: #334155; }
+body { background: #f8fafc; color: #334155; overflow-x: hidden; }
 :root { --primary: #0F766E; --primary-hover: #115E59; --secondary: #D4AF37; --shadow-md: 0 10px 15px -3px rgba(0,0,0,0.1); }
 
 /* --- Header & Navigasi --- */
@@ -47,7 +47,7 @@ nav ul li a:hover { color: var(--primary); transform: translateY(-2px); }
 .login-card h3 { text-align: center; color: var(--primary); font-size: 22px; margin-bottom: 20px; }
 .form-group { margin-bottom: 15px; }
 .form-group label { display: block; font-weight: 500; font-size: 14px; margin-bottom: 5px; color: #475569; text-align: left; }
-.form-group input, .form-group textarea { width: 100%; padding: 15px; border: 1.5px solid #cbd5e1; border-radius: 10px; font-size: 15px; transition: 0.3s; background: #f8fafc; font-family: 'Poppins', sans-serif; }
+.form-group input, .form-group textarea { width: 100%; padding: 15px; border: 1.5px solid #cbd5e1; border-radius: 10px; font-size: 16px; transition: 0.3s; background: #f8fafc; font-family: 'Poppins', sans-serif; }
 .form-group input:focus, .form-group textarea:focus { border-color: var(--primary); background: white; outline: none; }
 .btn-submit { width: 100%; padding: 15px; background: var(--primary); color: white; border: none; border-radius: 10px; font-size: 16px; font-weight: bold; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 10px; transition: 0.3s; }
 .btn-submit:hover { background: var(--primary-hover); transform: translateY(-2px); }
@@ -65,12 +65,12 @@ nav ul li a:hover { color: var(--primary); transform: translateY(-2px); }
 .stat-card h2 { color: var(--primary); font-size: 40px; margin-bottom: 5px; }
 
 .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-.card { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border-left: 4px solid var(--primary); }
+.card { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border-left: 4px solid var(--primary); word-wrap: break-word; }
 .card h3 { color: var(--primary); margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
 
 /* --- Modal Komen --- */
 .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 1000; justify-content: center; align-items: center; backdrop-filter: blur(4px); }
-.modal-content { background: white; padding: 30px; border-radius: 20px; width: 90%; max-width: 500px; position: relative; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); border-top: 5px solid var(--secondary); }
+.modal-content { background: white; padding: 30px; border-radius: 20px; width: 90%; max-width: 500px; position: relative; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); border-top: 5px solid var(--secondary); max-height: 90vh; overflow-y: auto; }
 .btn-close { position: absolute; top: 15px; right: 20px; background: none; border: none; font-size: 24px; color: #94a3b8; cursor: pointer; transition: 0.3s; }
 .btn-close:hover { color: #ef4444; }
 
@@ -85,7 +85,49 @@ nav ul li a:hover { color: var(--primary); transform: translateY(-2px); }
 
 footer { background: #0f514d; color: white; text-align: center; padding: 30px 20px; margin-top: 40px; }
 
-@media(max-width: 768px) { .header-container { flex-direction: column; gap: 10px; } .school-title h1 { font-size: 24px; } }
+/* ========================================================= */
+/* CSS KHUSUS UNTUK PERANTI MUDAH ALIH (MOBILE-FRIENDLY)     */
+/* ========================================================= */
+@media(max-width: 768px) { 
+    /* Header Padat */
+    header { padding: 15px 10px; }
+    .header-container { flex-direction: row; flex-wrap: wrap; justify-content: center; text-align: center; gap: 10px; } 
+    .logo { width: 55px; height: 55px; padding: 4px; }
+    .school-title { width: 100%; order: 3; padding: 0; }
+    .school-title h1 { font-size: 20px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3); } 
+    .school-title p { font-size: 12px; letter-spacing: 1px; }
+
+    /* Navigasi Boleh Tatal (Scrollable Menu) */
+    nav ul { 
+        flex-wrap: nowrap; 
+        overflow-x: auto; 
+        justify-content: flex-start; 
+        -webkit-overflow-scrolling: touch; 
+        padding: 0 10px;
+    }
+    nav ul::-webkit-scrollbar { display: none; } /* Sorok scrollbar */
+    nav ul li a { padding: 12px 15px; font-size: 13px; white-space: nowrap; }
+
+    /* Hero & Seksyen */
+    .hero { height: 320px; }
+    .hero h1 { font-size: 26px; }
+    .hero p { font-size: 14px; }
+    .section { padding: 50px 15px; }
+    .section-title { font-size: 24px; margin-bottom: 30px; }
+
+    /* Login Kad & Butang Toggle */
+    .toggle-container { flex-direction: column; border-radius: 15px; width: 100%; }
+    .toggle-btn { justify-content: center; border-radius: 10px; width: 100%; font-size: 14px; }
+    .login-card { padding: 25px 15px; }
+    .login-card h3 { font-size: 18px; }
+    .btn-submit { font-size: 14px; padding: 12px; }
+
+    /* Modal Komen */
+    .modal-content { padding: 25px 15px; }
+    
+    /* Memastikan input tidak auto-zoom pada iPhone */
+    .form-group input, .form-group textarea { font-size: 16px; padding: 12px; }
+}
 </style>
 </head>
 <body>
@@ -93,11 +135,11 @@ footer { background: #0f514d; color: white; text-align: center; padding: 30px 20
 <header>
     <div class="header-container">
         <img class="logo" src="https://i.postimg.cc/DZK7jPJC/Tahfiz-Baitul-Hikmah.png" alt="Logo">
+        <img class="logo" src="https://i.postimg.cc/PJ5s93tS/images.png" alt="Logo">
         <div class="school-title">
             <h1>SEKOLAH TAHFIZ BAITUL HIKMAH</h1>
             <p>PENJARA PENOR, KUANTAN</p>
         </div>
-        <img class="logo" src="https://i.postimg.cc/PJ5s93tS/images.png" alt="Logo">
     </div>
 </header>
 
@@ -133,7 +175,7 @@ footer { background: #0f514d; color: white; text-align: center; padding: 30px 20
         <h3>Semakan Rekod Kemajuan</h3>
         <div class="form-group">
             <label>No. Kad Pengenalan Pelajar</label>
-            <input type="text" id="ic" placeholder="Masukkan No. KP (Tanpa -)" maxlength="12">
+            <input type="text" id="ic" placeholder="Cth: 100101071234 (Tanpa Sengkang)" maxlength="12">
         </div>
         <button class="btn-submit" id="btn-semak" onclick="semakIC()"><i class="fa-solid fa-search"></i> Papar Rekod</button>
         <div class="result" id="result"></div>
@@ -154,10 +196,10 @@ footer { background: #0f514d; color: white; text-align: center; padding: 30px 20
         <div id="admin-dashboard" style="display: none;">
             <p style="color: #059669; font-weight: bold; text-align: center; margin-bottom: 20px; background: #d1fae5; padding: 10px; border-radius: 8px;">Berjaya Log Masuk Admin</p>
             
-            <div class="form-group"><label>No. KP</label><input type="text" id="add-ic"></div>
+            <div class="form-group"><label>No. KP</label><input type="text" id="add-ic" maxlength="12"></div>
             <div class="form-group"><label>Nama Pelajar</label><input type="text" id="add-nama"></div>
             <div class="form-group"><label>Kelas</label><input type="text" id="add-kelas"></div>
-            <div class="form-group"><label>Kemajuan Semasa (Cth: M/S 150 / Selesai 30 Juzuk)</label><input type="text" id="add-kemajuan"></div>
+            <div class="form-group"><label>Kemajuan Semasa</label><input type="text" id="add-kemajuan" placeholder="Cth: M/S 150"></div>
             <div class="form-group"><label>Tarikh Tasmik</label><input type="date" id="add-tarikh"></div>
             
             <button class="btn-submit" id="btn-simpan" onclick="simpanData()"><i class="fa-solid fa-save"></i> Simpan Data</button>
@@ -196,7 +238,7 @@ footer { background: #0f514d; color: white; text-align: center; padding: 30px 20
 
 <section id="interaksi" class="section">
     <h2 class="section-title" style="color: var(--secondary);">Ruangan Interaksi Awam</h2>
-    <p style="text-align: center; color: #475569; margin-bottom: 30px;">Tinggalkan kata-kata semangat, cadangan atau ucapan anda kepada warga Tahfiz Penjara Penor.</p>
+    <p style="text-align: center; color: #475569; margin-bottom: 30px; font-size: 14px;">Tinggalkan kata-kata semangat, cadangan atau ucapan anda kepada warga Tahfiz Penjara Penor.</p>
     
     <div style="text-align: center; margin-bottom: 40px;">
         <button class="btn-submit" style="display: inline-flex; width: auto; padding: 12px 30px; background: var(--secondary); color: white;" onclick="bukaModalKomen()">
@@ -212,32 +254,41 @@ footer { background: #0f514d; color: white; text-align: center; padding: 30px 20
 <div class="modal-overlay" id="modal-komen">
     <div class="modal-content">
         <button class="btn-close" onclick="tutupModalKomen()"><i class="fa-solid fa-times"></i></button>
-        <h3 style="color: var(--primary); text-align: center; margin-bottom: 20px; font-size: 22px;">Tinggalkan Komen / Sokongan</h3>
+        <h3 style="color: var(--primary); text-align: center; margin-bottom: 20px; font-size: 20px;">Tinggalkan Sokongan</h3>
         
-        <div class="form-group"><label>Nama Penuh / Nama Panggilan <span style="color:red">*</span></label>
-        <input type="text" id="k-nama" placeholder="Cth: Ahmad bin Ali"></div>
+        <div class="form-group">
+            <label>Nama Panggilan <span style="color:red">*</span></label>
+            <input type="text" id="k-nama" placeholder="Cth: Ahmad">
+        </div>
         
-        <div class="form-group"><label>Hubungan dengan Pelajar</label>
-        <input type="text" id="k-hubungan" placeholder="Cth: Bapa / Ibu / Orang Awam"></div>
+        <div class="form-group">
+            <label>Hubungan dengan Pelajar</label>
+            <input type="text" id="k-hubungan" placeholder="Cth: Bapa / Orang Awam">
+        </div>
         
-        <div class="form-group"><label>Lokasi Anda</label>
-        <input type="text" id="k-lokasi" placeholder="Cth: Kuantan, Pahang"></div>
+        <div class="form-group">
+            <label>Lokasi Anda</label>
+            <input type="text" id="k-lokasi" placeholder="Cth: Kuantan">
+        </div>
         
-        <div class="form-group"><label>Komen / Ucapan <span style="color:red">*</span></label>
-        <textarea id="k-teks" rows="4" placeholder="Taipkan kata-kata semangat atau komen anda di sini..."></textarea></div>
+        <div class="form-group">
+            <label>Komen / Ucapan <span style="color:red">*</span></label>
+            <textarea id="k-teks" rows="4" placeholder="Taipkan kata-kata anda di sini..."></textarea>
+        </div>
         
         <button class="btn-submit" id="btn-hantar-komen" onclick="hantarKomen()" style="background: var(--secondary);"><i class="fa-solid fa-paper-plane"></i> Hantar Komen</button>
         <div id="status-komen" style="text-align: center; margin-top: 15px; font-weight: 500; font-size: 14px;"></div>
     </div>
 </div>
+
 <footer>
     <h3>SEKOLAH TAHFIZ BAITUL HIKMAH</h3>
-    <p>PENJARA PENOR, KUANTAN | Hakcipta terpelihara © 2026</p>
+    <p>PENJARA PENOR, KUANTAN | Hakcipta terpelihara Â© 2026</p>
 </footer>
 
 <script>
 // MASUKKAN URL GOOGLE APPS SCRIPT ANDA DI SINI
-const API_URL = "https://script.google.com/macros/s/AKfycbwUPZRUSJgzUaDX8387FyU2PnL8kr_MDdqDSlmV8tNYqULiO5veyVmymSNUQ40el4e8/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbwsfuPcXb6l7S5rDxjZFir8OAuno76EHj3KzabQGFhcQuCEmguIKFYHGW8EBpxIz85YMw/exec";
 
 function pilihTab(tab) {
     document.getElementById("btn-pelajar").classList.toggle("active", tab === 'pelajar');
@@ -287,7 +338,7 @@ async function semakIC(){
         let data = await res.json();
         resDiv.style.display = "block";
         if(data.status === "success"){
-            resDiv.innerHTML = `<p><strong>Nama:</strong> ${data.data.nama}</p><p><strong>Kelas:</strong> ${data.data.kelas}</p><p><strong>Kemajuan:</strong> ${data.data.kemajuan}</p><p><strong>Tarikh Tasmik:</strong> ${data.data.tarikhTasmik}</p>`;
+            resDiv.innerHTML = `<p style="margin-bottom:8px;"><strong>Nama:</strong> ${data.data.nama}</p><p style="margin-bottom:8px;"><strong>Kelas:</strong> ${data.data.kelas}</p><p style="margin-bottom:8px;"><strong>Kemajuan:</strong> ${data.data.kemajuan}</p><p><strong>Tarikh Tasmik:</strong> ${data.data.tarikhTasmik}</p>`;
         } else if(data.status === "not_found") { 
             resDiv.classList.add("error"); resDiv.innerHTML = "Rekod tidak dijumpai."; 
         }
@@ -317,23 +368,17 @@ async function simpanData() {
     finally { btn.disabled = false; btn.innerHTML = '<i class="fa-solid fa-save"></i> Simpan Data'; }
 }
 
-// -- Fungsi Menghantar Komen Awam --
 async function hantarKomen() {
     let nama = document.getElementById("k-nama").value.trim();
     let hubungan = document.getElementById("k-hubungan").value.trim() || "Orang Awam";
     let lokasi = document.getElementById("k-lokasi").value.trim() || "-";
     let komen = document.getElementById("k-teks").value.trim();
-    
     let btn = document.getElementById("btn-hantar-komen");
     let status = document.getElementById("status-komen");
 
-    if(!nama || !komen) { 
-        status.innerHTML = "<i class='fa-solid fa-circle-exclamation'></i> Sila isi Nama dan Komen anda."; 
-        status.style.color = "#ef4444"; 
-        return; 
-    }
+    if(!nama || !komen) { status.innerHTML = "Sila isi Nama dan Komen."; status.style.color = "#ef4444"; return; }
     
-    btn.disabled = true; btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sedang Menghantar...';
+    btn.disabled = true; btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Menghantar...';
     status.innerHTML = "Memproses..."; status.style.color = "#0f766e";
 
     try {
@@ -341,17 +386,14 @@ async function hantarKomen() {
         let data = await res.json();
         
         if(data.status === "success") {
-            status.innerHTML = "<i class='fa-solid fa-check-circle'></i> Terima kasih! Komen dihantar dan sedang menanti kelulusan admin."; 
+            status.innerHTML = "<i class='fa-solid fa-check-circle'></i> Berjaya dihantar! Menanti kelulusan admin."; 
             status.style.color = "#059669";
-            setTimeout(() => { tutupModalKomen(); }, 3000); // Tutup popup automatik selepas 3 saat
+            setTimeout(() => { tutupModalKomen(); }, 3000);
         } else {
             status.innerHTML = "Ralat: " + data.message; status.style.color = "#ef4444";
         }
-    } catch (e) { 
-        status.innerHTML = "Gagal menghubungi server."; status.style.color = "#ef4444"; 
-    } finally { 
-        btn.disabled = false; btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Hantar Komen'; 
-    }
+    } catch (e) { status.innerHTML = "Gagal ke server."; status.style.color = "#ef4444"; } 
+    finally { btn.disabled = false; btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Hantar Komen'; }
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -365,15 +407,14 @@ document.addEventListener('DOMContentLoaded', async () => {
             let hPengumuman = ""; d.pengumuman.forEach(i => hPengumuman += `<div class="card"><h3><i class="fa-solid fa-bell"></i> ${i.Tajuk}</h3><p>${i.Keterangan}</p></div>`); document.getElementById('pengumuman-container').innerHTML = hPengumuman || "<p>Tiada data.</p>";
             let hPencapaian = ""; d.pencapaian.forEach(i => hPencapaian += `<div class="card"><h3><i class="fa-solid fa-medal"></i> ${i.Tajuk}</h3><p>${i.Keterangan}</p></div>`); document.getElementById('pencapaian-container').innerHTML = hPencapaian || "<p>Tiada data.</p>";
             let hSejarah = ""; d.sejarah.forEach(i => hSejarah += `<p style="margin-bottom:15px;text-align:justify;">${i.Perenggan}</p>`); document.getElementById('sejarah-container').innerHTML = hSejarah || "<p>Tiada data.</p>";
-            if(d.organisasi.URL_Gambar) document.getElementById('organisasi-container').innerHTML = `<img src="${d.organisasi.URL_Gambar}">`; else document.getElementById('organisasi-container').innerHTML = "<p>Tiada gambar.</p>";
+            if(d.organisasi && d.organisasi.URL_Gambar) document.getElementById('organisasi-container').innerHTML = `<img src="${d.organisasi.URL_Gambar}">`; else document.getElementById('organisasi-container').innerHTML = "<p>Tiada gambar.</p>";
             let hGaleri = ""; d.galeri.forEach(i => hGaleri += `<div class="gallery-img-wrapper"><img src="${i.URL_Gambar}"></div>`); document.getElementById('galeri-container').innerHTML = hGaleri || "<p>Tiada data.</p>";
             
-            // Papar Komen (Yang lulus sahaja)
             let hKomen = ""; 
             if(d.komen && d.komen.length > 0) {
-                d.komen.reverse().forEach(k => { // Reverse supaya komen terbaru di atas
+                d.komen.reverse().forEach(k => {
                     hKomen += `<div class="card" style="border-left-color: var(--secondary);">
-                        <p style="font-style: italic; color: #334155; margin-bottom: 12px; font-size: 16px;">"${k.Komen}"</p>
+                        <p style="font-style: italic; color: #334155; margin-bottom: 12px; font-size: 15px;">"${k.Komen}"</p>
                         <div style="font-size: 13px; color: var(--primary); font-weight: 600;">
                             <i class="fa-solid fa-user-circle"></i> ${k.Nama} <br>
                             <span style="color: #64748b; font-weight: 400;"><i class="fa-solid fa-users"></i> ${k.Hubungan} &nbsp;|&nbsp; <i class="fa-solid fa-location-dot"></i> ${k.Lokasi}</span>
@@ -381,7 +422,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     </div>`;
                 });
             }
-            document.getElementById('komen-container').innerHTML = hKomen || "<p style='text-align:center; width:100%; color: #94a3b8;'>Jadilah orang pertama yang meninggalkan komen!</p>";
+            document.getElementById('komen-container').innerHTML = hKomen || "<p style='text-align:center; width:100%; color: #94a3b8;'>Belum ada komen untuk dipaparkan.</p>";
         }
     } catch (e) { console.log(e); }
 });
