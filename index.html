@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sekolah Tahfiz Baitul Hikmah, Penjara Penor</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+/* --- Asas & Pemboleh Ubah --- */
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; scroll-behavior: smooth; }
+body { background: #f8fafc; color: #334155; }
+:root { --primary: #0F766E; --primary-hover: #115E59; --secondary: #D4AF37; --shadow-md: 0 10px 15px -3px rgba(0,0,0,0.1); }
+
+/* --- Header & Navigasi --- */
+header { background: linear-gradient(135deg, #0F766E, #0f514d); color: white; padding: 25px 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+.header-container { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: auto; }
+.logo { width: 90px; height: 90px; object-fit: contain; background: white; border-radius: 50%; padding: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.2); transition: transform 0.3s; }
+.logo:hover { transform: scale(1.05); }
+.school-title { text-align: center; flex: 1; padding: 0 20px; }
+.school-title h1 { font-size: 32px; font-weight: 700; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+.school-title p { font-size: 16px; opacity: 0.9; letter-spacing: 2px; }
+
+nav { background: white; box-shadow: 0 2px 4px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
+nav ul { display: flex; justify-content: center; list-style: none; flex-wrap: wrap; }
+nav ul li a { padding: 18px 25px; text-decoration: none; color: #475569; font-weight: 600; display: flex; align-items: center; gap: 8px; transition: 0.3s; }
+nav ul li a:hover { color: var(--primary); transform: translateY(-2px); }
+
+/* --- Hero --- */
+.hero { height: 450px; background: linear-gradient(rgba(15,118,110,0.8), rgba(0,0,0,0.8)), url('https://i.postimg.cc/HLFrpMJr/unnamed.jpg') center/cover; display: flex; align-items: center; justify-content: center; text-align: center; color: white; padding: 20px; }
+.hero h1 { font-size: 45px; font-weight: 700; margin-bottom: 10px; }
+.hero p { font-size: 18px; color: #e2e8f0; }
+
+/* --- Section Umum --- */
+.section { padding: 80px 20px; max-width: 1200px; margin: auto; }
+.section-title { text-align: center; font-size: 32px; font-weight: 700; color: var(--primary); margin-bottom: 40px; }
+.section-title::after { content: ''; display: block; width: 60px; height: 4px; background: var(--secondary); margin: 10px auto 0; border-radius: 2px; }
+
+/* --- Portal Akses (Semakan & Admin) --- */
+.toggle-wrapper { display: flex; justify-content: center; margin-bottom: 30px; }
+.toggle-container { background: #e2e8f0; padding: 6px; border-radius: 50px; display: inline-flex; }
+.toggle-btn { padding: 12px 30px; border: none; background: transparent; color: #64748b; font-size: 15px; font-weight: 600; border-radius: 50px; cursor: pointer; transition: 0.3s; display: flex; gap: 8px; align-items: center; }
+.toggle-btn.active { background: var(--primary); color: white; box-shadow: 0 4px 10px rgba(15,118,110,0.3); }
+
+.login-card { background: white; padding: 40px; border-radius: 20px; box-shadow: var(--shadow-md); max-width: 550px; margin: auto; border-top: 5px solid var(--primary); }
+.login-card h3 { text-align: center; color: var(--primary); font-size: 22px; margin-bottom: 20px; }
+.form-group { margin-bottom: 15px; }
+.form-group label { display: block; font-weight: 500; font-size: 14px; margin-bottom: 5px; color: #475569; text-align: left; }
+.form-group input, .form-group textarea { width: 100%; padding: 15px; border: 1.5px solid #cbd5e1; border-radius: 10px; font-size: 15px; transition: 0.3s; background: #f8fafc; font-family: 'Poppins', sans-serif; }
+.form-group input:focus, .form-group textarea:focus { border-color: var(--primary); background: white; outline: none; }
+.btn-submit { width: 100%; padding: 15px; background: var(--primary); color: white; border: none; border-radius: 10px; font-size: 16px; font-weight: bold; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 10px; transition: 0.3s; }
+.btn-submit:hover { background: var(--primary-hover); transform: translateY(-2px); }
+.btn-logout { background: #ef4444; margin-top: 10px; }
+.btn-logout:hover { background: #dc2626; }
+
+.result { margin-top: 25px; padding: 25px; background: #f0fdfa; border-radius: 15px; display: none; border-left: 5px solid var(--primary); }
+.result.error { background: #fef2f2; border-color: #ef4444; color: #b91c1c; }
+
+/* --- Grid Statistik & Kad --- */
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+.stat-card { background: white; padding: 30px; border-radius: 15px; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: 0.3s; border-bottom: 4px solid transparent; }
+.stat-card:hover { transform: translateY(-5px); border-color: var(--secondary); }
+.stat-icon { font-size: 35px; color: var(--secondary); margin-bottom: 10px; }
+.stat-card h2 { color: var(--primary); font-size: 40px; margin-bottom: 5px; }
+
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+.card { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border-left: 4px solid var(--primary); }
+.card h3 { color: var(--primary); margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+
+/* --- Modal Komen --- */
+.modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 1000; justify-content: center; align-items: center; backdrop-filter: blur(4px); }
+.modal-content { background: white; padding: 30px; border-radius: 20px; width: 90%; max-width: 500px; position: relative; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); border-top: 5px solid var(--secondary); }
+.btn-close { position: absolute; top: 15px; right: 20px; background: none; border: none; font-size: 24px; color: #94a3b8; cursor: pointer; transition: 0.3s; }
+.btn-close:hover { color: #ef4444; }
+
+/* --- Organisasi & Galeri --- */
+.org-chart { text-align: center; }
+.org-chart img { width: 100%; max-width: 800px; height: auto; border-radius: 15px; box-shadow: var(--shadow-md); }
+
+.gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px; }
+.gallery-img-wrapper { background: #e2e8f0; border-radius: 15px; overflow: hidden; display: flex; justify-content: center; align-items: center; padding: 5px; }
+.gallery img { width: 100%; max-height: 350px; object-fit: contain; border-radius: 10px; transition: 0.3s; }
+.gallery img:hover { transform: scale(1.03); }
+
+footer { background: #0f514d; color: white; text-align: center; padding: 30px 20px; margin-top: 40px; }
+
+@media(max-width: 768px) { .header-container { flex-direction: column; gap: 10px; } .school-title h1 { font-size: 24px; } }
+</style>
+</head>
+<body>
+
+<header>
+    <div class="header-container">
+        <img class="logo" src="https://i.postimg.cc/DZK7jPJC/Tahfiz-Baitul-Hikmah.png" alt="Logo">
+        <div class="school-title">
+            <h1>SEKOLAH TAHFIZ BAITUL HIKMAH</h1>
+            <p>PENJARA PENOR, KUANTAN</p>
+        </div>
+        <img class="logo" src="https://i.postimg.cc/PJ5s93tS/images.png" alt="Logo">
+    </div>
+</header>
+
+<nav>
+    <ul>
+        <li><a href="#"><i class="fa-solid fa-home"></i> Utama</a></li>
+        <li><a href="#semakan"><i class="fa-solid fa-id-card"></i> Portal Akses</a></li>
+        <li><a href="#pengumuman"><i class="fa-solid fa-bullhorn"></i> Pengumuman</a></li>
+        <li><a href="#organisasi"><i class="fa-solid fa-sitemap"></i> Organisasi</a></li>
+        <li><a href="#galeri"><i class="fa-solid fa-images"></i> Galeri</a></li>
+        <li><a href="#interaksi" style="color: var(--secondary);"><i class="fa-solid fa-comments"></i> Interaksi Awam</a></li>
+    </ul>
+</nav>
+
+<section class="hero">
+    <div class="hero-content">
+        <h1>Portal Interaktif Hafazan</h1>
+        <p>Melahirkan Generasi Al-Quran Berilmu dan Beramal</p>
+    </div>
+</section>
+
+<section id="semakan" class="section">
+    <h2 class="section-title">Portal Akses Rekod</h2>
+    
+    <div class="toggle-wrapper">
+        <div class="toggle-container">
+            <button class="toggle-btn active" id="btn-pelajar" onclick="pilihTab('pelajar')"><i class="fa-solid fa-user-graduate"></i> Semakan Pelajar</button>
+            <button class="toggle-btn" id="btn-admin" onclick="pilihTab('admin')"><i class="fa-solid fa-user-shield"></i> Admin</button>
+        </div>
+    </div>
+
+    <div class="login-card" id="tab-pelajar">
+        <h3>Semakan Rekod Kemajuan</h3>
+        <div class="form-group">
+            <label>No. Kad Pengenalan Pelajar</label>
+            <input type="text" id="ic" placeholder="Masukkan No. KP (Tanpa -)" maxlength="12">
+        </div>
+        <button class="btn-submit" id="btn-semak" onclick="semakIC()"><i class="fa-solid fa-search"></i> Papar Rekod</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <div class="login-card" id="tab-admin" style="display: none;">
+        <h3>Pengurusan Kemas Kini Data</h3>
+        
+        <div id="admin-login-box">
+            <div class="form-group">
+                <label>Kata Laluan Admin</label>
+                <input type="password" id="admin-pass" placeholder="Sila masukkan kata laluan">
+            </div>
+            <button class="btn-submit" onclick="loginAdmin()"><i class="fa-solid fa-unlock"></i> Log Masuk</button>
+            <p id="admin-error" style="color: red; text-align: center; margin-top: 15px; display: none;">Kata laluan salah!</p>
+        </div>
+
+        <div id="admin-dashboard" style="display: none;">
+            <p style="color: #059669; font-weight: bold; text-align: center; margin-bottom: 20px; background: #d1fae5; padding: 10px; border-radius: 8px;">Berjaya Log Masuk Admin</p>
+            
+            <div class="form-group"><label>No. KP</label><input type="text" id="add-ic"></div>
+            <div class="form-group"><label>Nama Pelajar</label><input type="text" id="add-nama"></div>
+            <div class="form-group"><label>Kelas</label><input type="text" id="add-kelas"></div>
+            <div class="form-group"><label>Kemajuan Semasa (Cth: M/S 150 / Selesai 30 Juzuk)</label><input type="text" id="add-kemajuan"></div>
+            <div class="form-group"><label>Tarikh Tasmik</label><input type="date" id="add-tarikh"></div>
+            
+            <button class="btn-submit" id="btn-simpan" onclick="simpanData()"><i class="fa-solid fa-save"></i> Simpan Data</button>
+            <button class="btn-submit btn-logout" onclick="logoutAdmin()"><i class="fa-solid fa-sign-out-alt"></i> Log Keluar</button>
+            <div id="simpan-status" style="text-align: center; margin-top: 15px; font-weight: bold;"></div>
+        </div>
+    </div>
+</section>
+
+<section class="section" style="background: white;">
+    <h2 class="section-title">Statistik Semasa</h2>
+    <div class="stats" id="statistik-container"><p style="text-align:center; width:100%;">Memuatkan data...</p></div>
+</section>
+
+<section id="pengumuman" class="section">
+    <h2 class="section-title">Pengumuman & Pencapaian</h2>
+    <div class="cards" id="pengumuman-container"><p style="text-align:center; width:100%;">Memuatkan data...</p></div>
+    <br><br>
+    <div class="cards" id="pencapaian-container"></div>
+</section>
+
+<section id="sejarah" class="section" style="background: white;">
+    <h2 class="section-title">Sejarah Penubuhan</h2>
+    <div class="login-card" style="max-width: 900px; box-shadow: none; border: 1px solid #e2e8f0;" id="sejarah-container"><p style="text-align:center;">Memuatkan data...</p></div>
+</section>
+
+<section id="organisasi" class="section">
+    <h2 class="section-title">Carta Organisasi</h2>
+    <div class="org-chart" id="organisasi-container"><p style="text-align:center;">Memuatkan data...</p></div>
+</section>
+
+<section id="galeri" class="section" style="background: white;">
+    <h2 class="section-title">Galeri Aktiviti</h2>
+    <div class="gallery" id="galeri-container"><p style="text-align:center; width:100%;">Memuatkan data...</p></div>
+</section>
+
+<section id="interaksi" class="section">
+    <h2 class="section-title" style="color: var(--secondary);">Ruangan Interaksi Awam</h2>
+    <p style="text-align: center; color: #475569; margin-bottom: 30px;">Tinggalkan kata-kata semangat, cadangan atau ucapan anda kepada warga Tahfiz Penjara Penor.</p>
+    
+    <div style="text-align: center; margin-bottom: 40px;">
+        <button class="btn-submit" style="display: inline-flex; width: auto; padding: 12px 30px; background: var(--secondary); color: white;" onclick="bukaModalKomen()">
+            <i class="fa-solid fa-comment-dots"></i> Tinggalkan Komen
+        </button>
+    </div>
+
+    <div class="cards" id="komen-container">
+        <p style="text-align:center; width:100%; color: #94a3b8;"><i class="fa-solid fa-spinner fa-spin"></i> Memuatkan ruangan interaksi...</p>
+    </div>
+</section>
+
+<div class="modal-overlay" id="modal-komen">
+    <div class="modal-content">
+        <button class="btn-close" onclick="tutupModalKomen()"><i class="fa-solid fa-times"></i></button>
+        <h3 style="color: var(--primary); text-align: center; margin-bottom: 20px; font-size: 22px;">Tinggalkan Komen / Sokongan</h3>
+        
+        <div class="form-group"><label>Nama Penuh / Nama Panggilan <span style="color:red">*</span></label>
+        <input type="text" id="k-nama" placeholder="Cth: Ahmad bin Ali"></div>
+        
+        <div class="form-group"><label>Hubungan dengan Pelajar</label>
+        <input type="text" id="k-hubungan" placeholder="Cth: Bapa / Ibu / Orang Awam"></div>
+        
+        <div class="form-group"><label>Lokasi Anda</label>
+        <input type="text" id="k-lokasi" placeholder="Cth: Kuantan, Pahang"></div>
+        
+        <div class="form-group"><label>Komen / Ucapan <span style="color:red">*</span></label>
+        <textarea id="k-teks" rows="4" placeholder="Taipkan kata-kata semangat atau komen anda di sini..."></textarea></div>
+        
+        <button class="btn-submit" id="btn-hantar-komen" onclick="hantarKomen()" style="background: var(--secondary);"><i class="fa-solid fa-paper-plane"></i> Hantar Komen</button>
+        <div id="status-komen" style="text-align: center; margin-top: 15px; font-weight: 500; font-size: 14px;"></div>
+    </div>
+</div>
+<footer>
+    <h3>SEKOLAH TAHFIZ BAITUL HIKMAH</h3>
+    <p>PENJARA PENOR, KUANTAN | Hakcipta terpelihara © 2026</p>
+</footer>
+
+<script>
+// MASUKKAN URL GOOGLE APPS SCRIPT ANDA DI SINI
+const API_URL = "https://script.google.com/macros/s/AKfycbwUPZRUSJgzUaDX8387FyU2PnL8kr_MDdqDSlmV8tNYqULiO5veyVmymSNUQ40el4e8/exec";
+
+function pilihTab(tab) {
+    document.getElementById("btn-pelajar").classList.toggle("active", tab === 'pelajar');
+    document.getElementById("btn-admin").classList.toggle("active", tab === 'admin');
+    document.getElementById("tab-pelajar").style.display = tab === 'pelajar' ? 'block' : 'none';
+    document.getElementById("tab-admin").style.display = tab === 'admin' ? 'block' : 'none';
+    document.getElementById("result").style.display = "none";
+}
+
+function loginAdmin() {
+    if(document.getElementById("admin-pass").value === "penor2026") {
+        document.getElementById("admin-login-box").style.display = "none";
+        document.getElementById("admin-dashboard").style.display = "block";
+        document.getElementById("admin-error").style.display = "none";
+        document.getElementById("add-tarikh").valueAsDate = new Date();
+    } else {
+        document.getElementById("admin-error").style.display = "block";
+    }
+}
+
+function logoutAdmin() {
+    document.getElementById("admin-pass").value = "";
+    document.getElementById("admin-login-box").style.display = "block";
+    document.getElementById("admin-dashboard").style.display = "none";
+    document.getElementById("simpan-status").innerText = "";
+}
+
+// -- Fungsi Modal Komen --
+function bukaModalKomen() { document.getElementById("modal-komen").style.display = "flex"; }
+function tutupModalKomen() { 
+    document.getElementById("modal-komen").style.display = "none"; 
+    document.getElementById("status-komen").innerText = "";
+}
+
+async function semakIC(){
+    let ic = document.getElementById("ic").value.trim();
+    let resDiv = document.getElementById("result");
+    let btn = document.getElementById("btn-semak");
+    resDiv.classList.remove("error");
+
+    if(ic === "") { resDiv.style.display = "block"; resDiv.classList.add("error"); resDiv.innerHTML = "Sila masukkan No KP."; return; }
+    
+    btn.disabled = true; btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Memuatkan...'; resDiv.style.display = "none";
+    
+    try {
+        let res = await fetch(`${API_URL}?action=semak&ic=${ic}`);
+        let data = await res.json();
+        resDiv.style.display = "block";
+        if(data.status === "success"){
+            resDiv.innerHTML = `<p><strong>Nama:</strong> ${data.data.nama}</p><p><strong>Kelas:</strong> ${data.data.kelas}</p><p><strong>Kemajuan:</strong> ${data.data.kemajuan}</p><p><strong>Tarikh Tasmik:</strong> ${data.data.tarikhTasmik}</p>`;
+        } else if(data.status === "not_found") { 
+            resDiv.classList.add("error"); resDiv.innerHTML = "Rekod tidak dijumpai."; 
+        }
+    } catch (e) { 
+        resDiv.classList.add("error"); resDiv.style.display = "block"; resDiv.innerHTML = "Gagal menghubungi server."; 
+    } finally { 
+        btn.disabled = false; btn.innerHTML = '<i class="fa-solid fa-search"></i> Papar Rekod'; 
+    }
+}
+
+async function simpanData() {
+    let ic = document.getElementById("add-ic").value.trim(), nama = document.getElementById("add-nama").value.trim(), kelas = document.getElementById("add-kelas").value.trim(), kemajuan = document.getElementById("add-kemajuan").value.trim(), tarikh = document.getElementById("add-tarikh").value;
+    let status = document.getElementById("simpan-status"), btn = document.getElementById("btn-simpan");
+
+    if(!ic || !nama) { status.innerHTML = "No KP & Nama Wajib Diisi!"; status.style.color = "red"; return; }
+    
+    btn.disabled = true; btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Menyimpan...'; status.innerHTML = "Menghantar data..."; status.style.color = "#0f766e";
+    
+    try {
+        let res = await fetch(`${API_URL}?action=tambah&pwd=penor2026&ic=${encodeURIComponent(ic)}&nama=${encodeURIComponent(nama)}&kelas=${encodeURIComponent(kelas)}&kemajuan=${encodeURIComponent(kemajuan)}&tarikh=${encodeURIComponent(tarikh)}`);
+        let data = await res.json();
+        if(data.status === "success") {
+            status.innerHTML = "Berjaya direkodkan!"; status.style.color = "green";
+            document.getElementById("add-ic").value = ""; document.getElementById("add-nama").value = ""; document.getElementById("add-kemajuan").value = "";
+        } else { status.innerHTML = "Ralat: " + data.message; status.style.color = "red"; }
+    } catch (e) { status.innerHTML = "Gagal ke server."; status.style.color = "red"; } 
+    finally { btn.disabled = false; btn.innerHTML = '<i class="fa-solid fa-save"></i> Simpan Data'; }
+}
+
+// -- Fungsi Menghantar Komen Awam --
+async function hantarKomen() {
+    let nama = document.getElementById("k-nama").value.trim();
+    let hubungan = document.getElementById("k-hubungan").value.trim() || "Orang Awam";
+    let lokasi = document.getElementById("k-lokasi").value.trim() || "-";
+    let komen = document.getElementById("k-teks").value.trim();
+    
+    let btn = document.getElementById("btn-hantar-komen");
+    let status = document.getElementById("status-komen");
+
+    if(!nama || !komen) { 
+        status.innerHTML = "<i class='fa-solid fa-circle-exclamation'></i> Sila isi Nama dan Komen anda."; 
+        status.style.color = "#ef4444"; 
+        return; 
+    }
+    
+    btn.disabled = true; btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sedang Menghantar...';
+    status.innerHTML = "Memproses..."; status.style.color = "#0f766e";
+
+    try {
+        let res = await fetch(`${API_URL}?action=tambahKomen&nama=${encodeURIComponent(nama)}&hubungan=${encodeURIComponent(hubungan)}&lokasi=${encodeURIComponent(lokasi)}&komen=${encodeURIComponent(komen)}`);
+        let data = await res.json();
+        
+        if(data.status === "success") {
+            status.innerHTML = "<i class='fa-solid fa-check-circle'></i> Terima kasih! Komen dihantar dan sedang menanti kelulusan admin."; 
+            status.style.color = "#059669";
+            setTimeout(() => { tutupModalKomen(); }, 3000); // Tutup popup automatik selepas 3 saat
+        } else {
+            status.innerHTML = "Ralat: " + data.message; status.style.color = "#ef4444";
+        }
+    } catch (e) { 
+        status.innerHTML = "Gagal menghubungi server."; status.style.color = "#ef4444"; 
+    } finally { 
+        btn.disabled = false; btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Hantar Komen'; 
+    }
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
+    try {
+        let response = await fetch(`${API_URL}?action=getHomeData`);
+        let resData = await response.json();
+        if(resData.status === "success") {
+            let d = resData.data;
+            if(d.statistik) document.getElementById('statistik-container').innerHTML = `<div class="stat-card"><i class="fa-solid fa-users stat-icon"></i><h2>${d.statistik.Pelajar || 0}</h2><p>Pelajar</p></div><div class="stat-card"><i class="fa-solid fa-chalkboard-user stat-icon"></i><h2>${d.statistik.Guru || 0}</h2><p>Guru</p></div><div class="stat-card"><i class="fa-solid fa-book-quran stat-icon"></i><h2>${d.statistik.Juzuk || 0}</h2><p>Juzuk</p></div><div class="stat-card"><i class="fa-solid fa-calendar-check stat-icon"></i><h2>${d.statistik.Kehadiran || "0%"}</h2><p>Kehadiran</p></div>`;
+            
+            let hPengumuman = ""; d.pengumuman.forEach(i => hPengumuman += `<div class="card"><h3><i class="fa-solid fa-bell"></i> ${i.Tajuk}</h3><p>${i.Keterangan}</p></div>`); document.getElementById('pengumuman-container').innerHTML = hPengumuman || "<p>Tiada data.</p>";
+            let hPencapaian = ""; d.pencapaian.forEach(i => hPencapaian += `<div class="card"><h3><i class="fa-solid fa-medal"></i> ${i.Tajuk}</h3><p>${i.Keterangan}</p></div>`); document.getElementById('pencapaian-container').innerHTML = hPencapaian || "<p>Tiada data.</p>";
+            let hSejarah = ""; d.sejarah.forEach(i => hSejarah += `<p style="margin-bottom:15px;text-align:justify;">${i.Perenggan}</p>`); document.getElementById('sejarah-container').innerHTML = hSejarah || "<p>Tiada data.</p>";
+            if(d.organisasi.URL_Gambar) document.getElementById('organisasi-container').innerHTML = `<img src="${d.organisasi.URL_Gambar}">`; else document.getElementById('organisasi-container').innerHTML = "<p>Tiada gambar.</p>";
+            let hGaleri = ""; d.galeri.forEach(i => hGaleri += `<div class="gallery-img-wrapper"><img src="${i.URL_Gambar}"></div>`); document.getElementById('galeri-container').innerHTML = hGaleri || "<p>Tiada data.</p>";
+            
+            // Papar Komen (Yang lulus sahaja)
+            let hKomen = ""; 
+            if(d.komen && d.komen.length > 0) {
+                d.komen.reverse().forEach(k => { // Reverse supaya komen terbaru di atas
+                    hKomen += `<div class="card" style="border-left-color: var(--secondary);">
+                        <p style="font-style: italic; color: #334155; margin-bottom: 12px; font-size: 16px;">"${k.Komen}"</p>
+                        <div style="font-size: 13px; color: var(--primary); font-weight: 600;">
+                            <i class="fa-solid fa-user-circle"></i> ${k.Nama} <br>
+                            <span style="color: #64748b; font-weight: 400;"><i class="fa-solid fa-users"></i> ${k.Hubungan} &nbsp;|&nbsp; <i class="fa-solid fa-location-dot"></i> ${k.Lokasi}</span>
+                        </div>
+                    </div>`;
+                });
+            }
+            document.getElementById('komen-container').innerHTML = hKomen || "<p style='text-align:center; width:100%; color: #94a3b8;'>Jadilah orang pertama yang meninggalkan komen!</p>";
+        }
+    } catch (e) { console.log(e); }
+});
+</script>
+</body>
+</html>
